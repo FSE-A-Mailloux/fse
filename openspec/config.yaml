@@ -2,33 +2,26 @@ schema: spec-driven
 githubCopilot:
   cloudAgent: false
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Langue obligatoire: francais (fr-FR) pour les artefacts OpenSpec.
+  Rediger proposal, design, tasks et specs en francais.
+  Garder les mots cles normatifs (MUST, SHALL) en anglais si necessaire,
+  mais tout le texte explicatif doit rester en francais.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - Rediger 100% en francais.
+  design:
+    - Rediger 100% en francais.
+  tasks:
+    - Rediger 100% en francais.
+  specs:
+    - Rediger 100% en francais.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+operations:
+  apply:
+    guidance:
+      - Produire les resumes et explications en francais.
+  archive:
+    guidance:
+      - Produire le resume d'archivage en francais.
