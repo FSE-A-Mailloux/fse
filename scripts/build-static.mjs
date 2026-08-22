@@ -25,9 +25,10 @@ async function copyDirRecursive(sourceDir, targetDir) {
 }
 
 async function assertSourceReady() {
-  const required = ["index.html", "sitemap.xml", "robots.txt", "_redirects"];
+  const requiredFiles = ["index.html", "robots.txt", "_redirects"];
+  const requiredDirs = ["sitemap"];
 
-  for (const fileName of required) {
+  for (const fileName of requiredFiles) {
     const target = path.join(SRC_DIR, fileName);
     try {
       const stat = await fs.stat(target);
@@ -36,6 +37,18 @@ async function assertSourceReady() {
       }
     } catch {
       throw new Error(`Source statique invalide: fichier requis manquant dans src/: ${fileName}`);
+    }
+  }
+
+  for (const dirName of requiredDirs) {
+    const target = path.join(SRC_DIR, dirName);
+    try {
+      const stat = await fs.stat(target);
+      if (!stat.isDirectory()) {
+        throw new Error();
+      }
+    } catch {
+      throw new Error(`Source statique invalide: dossier requis manquant dans src/: ${dirName}/`);
     }
   }
 }

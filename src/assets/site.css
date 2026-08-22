@@ -1,18 +1,343 @@
-:root { color-scheme: light; }
-body { font-family: Inter, Arial, sans-serif; margin: 0; color: #1f2937; background: #f3f6fb; line-height: 1.55; }
-.wrap { max-width: 1060px; margin: 0 auto; padding: 1rem; }
-.topbar { background: #0f172a; color: #e2e8f0; border-bottom: 3px solid #2563eb; }
-.topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.brand { font-weight: 700; letter-spacing: .2px; }
-.meta-nav a { color: #cbd5e1; text-decoration: none; margin-left: .8rem; }
+/* ===================================================
+   Variables globales — palette, typographie, espacements
+   =================================================== */
+:root {
+  --color-primary:       #1a3a6b;
+  --color-primary-light: #2563eb;
+  --color-surface:       #ffffff;
+  --color-bg:            #f0f4f8;
+  --color-text:          #1e293b;
+  --color-text-muted:    #64748b;
+  --color-border:        #e2e8f0;
+  --color-topbar-bg:     #0f172a;
+  --color-topbar-text:   #cbd5e1;
+  --color-topbar-accent: #3b82f6;
+
+  --font-body:      system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-sm:   0.9rem;
+
+  --radius:     12px;
+  --shadow:     0 2px 14px rgba(15, 23, 42, 0.09);
+  --transition: 0.18s ease;
+}
+
+/* ===================================================
+   Reset minimal
+   =================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===================================================
+   Base — corps de page
+   =================================================== */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base); /* ≥ 16px — exigence mobile */
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.65;
+}
+
+/* ===================================================
+   Mise en page — conteneur centré
+   =================================================== */
+.wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ===================================================
+   Topbar — barre supérieure
+   =================================================== */
+.topbar {
+  background: var(--color-topbar-bg);
+  color: var(--color-topbar-text);
+  border-bottom: 3px solid var(--color-topbar-accent);
+  padding: 0.65rem 0;
+}
+
+.topbar .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.meta-nav a {
+  color: var(--color-topbar-text);
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition);
+}
+
 .meta-nav a:hover { color: #fff; }
-.subnav { background: #fff; border-bottom: 1px solid #e2e8f0; }
-.subnav .wrap { display: flex; flex-wrap: wrap; gap: .45rem .7rem; }
-.subnav a { display: inline-block; text-decoration: none; color: #1d4ed8; font-size: .95rem; }
-.subnav a:hover { text-decoration: underline; }
-main.wrap { padding-top: 1.2rem; padding-bottom: 1.5rem; }
-article { background: #fff; padding: 1.35rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06); }
-article img { max-width: 100%; height: auto; }
-a { color: #1d4ed8; }
-footer { color: #64748b; font-size: .9rem; }
+
+/* Navigation utilitaire visible (Accueil / Plan du site). */
+.meta-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* ===================================================
+   Navigation principale — subnav
+   =================================================== */
+.subnav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
+}
+
+.subnav-primary {
+  border-bottom: 0;
+  padding-bottom: 0.25rem;
+}
+
+.subnav-secondary {
+  background: #f8fbff;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.4rem;
+}
+
+.subnav .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.55rem;
+  overflow: visible;
+  padding-bottom: 0;
+}
+
+.subnav-secondary .wrap {
+  gap: 0.35rem 0.4rem;
+}
+
+.subnav a {
+  display: inline-block;
+  white-space: normal;
+  text-decoration: none;
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  padding: 0.28rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: background var(--transition), color var(--transition);
+}
+
+.subnav-primary a {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.subnav-secondary a {
+  font-size: 0.86rem;
+  background: #fff;
+  border-color: var(--color-border);
+}
+
+.subnav a:hover {
+  background: var(--color-primary-light);
+  color: #fff;
+}
+
+.subnav a.is-current,
+.subnav a[aria-current="page"] {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.subnav a:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+/* ===================================================
+   Contenu principal
+   =================================================== */
+main.wrap {
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+article {
+  background: var(--color-surface);
+  padding: 1.75rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+}
+
+article h1 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+article h2 {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+article ul  { padding-left: 1.3rem; }
+article li  { margin-bottom: 0.4rem; }
+
+/* Accueil plus editorial que "plan du site" */
+.home-intro {
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.home-grid {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.home-card {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: #f8fbff;
+  padding: 1rem;
+}
+
+.home-card h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.35rem;
+}
+
+.home-card p {
+  margin: 0 0 0.65rem;
+  color: #334155;
+}
+
+.home-quick-links {
+  margin-top: 1.4rem;
+}
+
+.home-quick-links ul {
+  margin: 0.45rem 0 0;
+}
+
+/* Uniformisation typographique du contenu legacy */
+article,
+article p,
+article li,
+article td,
+article th {
+  font-family: var(--font-body);
+}
+
+/* Liens globaux */
+a       { color: var(--color-primary-light); }
+a:hover { color: var(--color-primary); }
+
+/* ===================================================
+   Footer
+   =================================================== */
+footer.wrap {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* ===================================================
+   Responsive — mobile (≤ 768px)
+   Garantit : pas de défilement horizontal, police ≥ 16px
+   =================================================== */
+@media (max-width: 768px) {
+  .wrap { padding: 0 1rem; }
+
+  .topbar .wrap {
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  .meta-nav a {
+    margin-left: 0;
+    margin-right: 0.75rem;
+  }
+
+  /* Navigation non-sticky sur mobile pour économiser de l'espace */
+  .subnav { position: static; }
+
+  article {
+    padding: 1.1rem 1rem;
+  }
+
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Utilitaires de migration: remplacement des styles inline legacy */
+.u-text-left { text-align: left; }
+.u-text-center { text-align: center; }
+.u-text-justify { text-align: justify; }
+
+
+/* On conserve les classes legacy mais on les aligne sur la typo globale */
+.u-font-legacy { font-family: var(--font-body); }
+.u-font-comic { font-family: var(--font-body); }
+
+/* Echelle typographique harmonisee (noms semantiques) */
+.u-fs-xs { font-size: 0.9rem; }
+.u-fs-sm { font-size: 1rem; }
+.u-fs-md { font-size: 1.1rem; }
+.u-fs-lg { font-size: 1.25rem; }
+.u-fs-xl { font-size: 1.5rem; }
+
+/* Alias legacy conserves pour ne rien casser dans les pages existantes */
+.u-fs-10pt { font-size: 0.9rem; }
+.u-fs-12pt { font-size: 1rem; }
+.u-fs-14pt { font-size: 1.1rem; }
+.u-fs-18pt { font-size: 1.25rem; }
+.u-fs-24pt { font-size: 1.5rem; }
+.u-fs-16px { font-size: 1rem; }
+
+.u-color-red { color: #ff0000; }
+.u-color-magenta { color: #ff00ff; }
+.u-color-black { color: #000000; }
+.u-color-blue { color: #0000ff; }
+.u-color-orange { color: #ff6600; }
+.u-color-brown-red { color: #cc3300; }
+
+.u-pl-30 { padding-left: 30px; }
+.u-pl-60 { padding-left: 60px; }
+.u-list-square { list-style-type: square; }
+
+.u-w-540 { width: min(540px, 100%); }
+.u-w-548-h-290 {
+  width: min(548px, 100%);
+  max-width: 100%;
+  height: auto;
+}
+.u-w-400 { width: min(400px, 100%); }
 
