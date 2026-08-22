@@ -1,9 +1,4 @@
-# site-visual-identity Specification
-
-## Purpose
-Définir les exigences visuelles et d'expérience utilisateur du site public du FSE : palette de couleurs, typographie, composants UI, message d'accueil et lisibilité sur tous les écrans.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Le site MUST présenter une identité visuelle moderne et cohérente
 
@@ -53,19 +48,7 @@ La mise en page SHALL s'adapter aux écrans de petite taille (minimum 320px) san
 - **WHEN** un visiteur interagit avec les liens principaux depuis un smartphone
 - **THEN** les elements interactifs critiques disposent d'une zone tactile suffisante pour eviter les erreurs de clic
 
-### Requirement: Le message d'accueil MUST être accueillant et représentatif du FSE
-
-La page d'accueil SHALL présenter un texte d'introduction clair, chaleureux et représentatif de la mission du FSE et de la CoopSco, remplaçant tout message générique ou technique.
-
-#### Scenario: Absence de message technique en production
-
-- **WHEN** un visiteur consulte la page d'accueil
-- **THEN** aucun message faisant référence à la nature statique ou technique du site n'est visible
-
-#### Scenario: Message d'accueil représentatif
-
-- **WHEN** un visiteur arrive sur la page d'accueil
-- **THEN** le texte d'introduction mentionne le FSE et/ou la CoopSco et invite à découvrir le contenu du site
+## ADDED Requirements
 
 ### Requirement: La page d'accueil MUST exprimer une ambiance éditoriale accueillante
 
@@ -78,3 +61,4 @@ La page d'accueil SHALL utiliser un bloc d'introduction visuel (hero ou équival
 #### Scenario: Parcours de découverte guidé
 - **WHEN** un visiteur consulte la zone principale de la page d'accueil
 - **THEN** les cartes et appels à l'action lui permettent d'identifier rapidement les rubriques prioritaires du site
+

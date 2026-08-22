@@ -61,14 +61,15 @@
 
   function sectionFromPath(pathname) {
     if (pathname === "/" || pathname === "/home/") return "accueil";
+    if (pathname.indexOf("/sitemap/") === 0) return "accueil";
     if (pathname.indexOf("/actualites/") === 0) return "actualites";
     if (pathname.indexOf("/coopsco/") === 0) return "coopsco";
     if (pathname.indexOf("/fse/") === 0) return "fse";
     if (pathname.indexOf("/liens-avec-les-associations/") === 0) return "liens";
     if (pathname.indexOf("/nous-contacter/") === 0) return "contact";
 
-    // Pages hors sections principales: on affiche FSE par defaut.
-    return "fse";
+    // Pages hors sections principales: fallback vers Accueil.
+    return "accueil";
   }
 
   function topLinkSection(href) {
