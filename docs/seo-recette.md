@@ -14,7 +14,8 @@ Ce lot ne depend pas d'analytics/search console.
 
 ## Verification automatique
 
-- `npm run audit`
+- `npm run check:seo`
 - `npm run check:redirects`
-- Rapport consolide dans `reports/preprod-audit.json` et `reports/redirect-check.json`
+- `npm run check:coverage`
+- Rapports QA generes localement dans `reports/preprod-audit.json`, `reports/redirect-check.json` et `reports/coverage-compare.json`
 

@@ -16,3 +16,7 @@ fsecoopeidam_mysql_db.sql
 dist/
 data/
 
+# QA generated reports
+reports/*.json
+!reports/.gitkeep
+

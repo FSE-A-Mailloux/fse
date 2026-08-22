@@ -12,15 +12,7 @@
 
 ## Templates et donnees 11ty
 
-- `site/index.njk`
-- `site/pages.njk`
-- `site/redirects.njk`
-- `site/sitemap.njk`
-- `site/robots.njk`
-- `site/_includes/layouts/base.njk`
-- `site/_data/pages.js`
-- `site/_data/redirects.js`
-- `site/_data/site.js`
+Ces artefacts faisaient partie de l'ancien dossier `site/` et ont ete retires du depot lors de la bascule vers `src/` comme source statique unique.
 
 ## Verification de l'inventaire
 

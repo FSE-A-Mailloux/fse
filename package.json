@@ -1,30 +1,21 @@
 {
   "name": "fse",
   "version": "1.0.0",
-  "description": "Migration Joomla vers site purement statique HTML/CSS avec pipeline SEO",
+  "description": "Publication d'un site statique HTML/CSS a partir d'un corpus versionne dans src",
   "type": "module",
   "scripts": {
-    "export": "node scripts/export-joomla.mjs",
-    "export:verify": "node scripts/verify-export-determinism.mjs",
-    "normalize": "node scripts/normalize-content.mjs",
-    "build": "npm run export && npm run normalize && npm run build:site",
-    "build:site": "node scripts/build-static.mjs",
+    "build": "node scripts/build-static.mjs",
     "serve": "node scripts/serve-static.mjs",
-    "baseline:capture": "npm run build && node scripts/check-html-parity.mjs --capture && node scripts/compare-coverage.mjs --capture",
-    "parity:html": "node scripts/check-html-parity.mjs",
-    "parity:html:self-test": "node scripts/check-html-parity.mjs --self-test",
-    "coverage:compare": "node scripts/compare-coverage.mjs",
-    "audit": "node scripts/audit-build.mjs",
+    "preview": "npm run build && npm run serve",
+    "check:seo": "node scripts/audit-build.mjs",
     "check:redirects": "node scripts/check-redirects.mjs",
-    "qa": "npm run build && npm run audit && npm run check:redirects && npm run parity:html && npm run coverage:compare",
-    "dev": "npm run build",
-    "test": "npm run export:verify && npm run qa"
+    "check:coverage": "node scripts/compare-coverage.mjs",
+    "check": "npm run build && npm run check:seo && npm run check:redirects && npm run check:coverage",
+    "qa": "npm run check",
+    "test": "npm run check"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "he": "^1.2.0",
-    "mysql2": "^3.11.3"
-  }
+  "dependencies": {}
 }

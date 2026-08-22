@@ -2,10 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = process.cwd();
+const SRC_DIR = path.join(ROOT, "src");
 const DIST_DIR = path.join(ROOT, "dist");
 const REPORTS_DIR = path.join(ROOT, "reports");
-const BASELINE_PATH = path.join(REPORTS_DIR, "url-coverage-baseline.json");
-const NORMALIZED_PAGES_PATH = path.join(ROOT, "data", "normalized", "pages.json");
 
 function stableStringify(value) {
   if (Array.isArray(value)) {
@@ -42,14 +41,14 @@ function normalizedUrlFromHtmlRelative(relativePath) {
   if (!clean.endsWith("/index.html")) {
     return null;
   }
-  return `/${clean.slice(0, -"index.html".length)}`;
+  return `/${clean.slice(0, -"/index.html".length)}/`;
 }
 
-async function currentPublishedUrls() {
-  const files = await collectHtmlFiles(DIST_DIR);
+async function publishedUrlsFrom(dirPath) {
+  const files = await collectHtmlFiles(dirPath);
   const urls = new Set();
   for (const filePath of files) {
-    const relative = path.relative(DIST_DIR, filePath);
+    const relative = path.relative(dirPath, filePath);
     const url = normalizedUrlFromHtmlRelative(relative);
     if (url) {
       urls.add(url);
@@ -58,56 +57,36 @@ async function currentPublishedUrls() {
   return [...urls].sort();
 }
 
-async function captureBaseline() {
-  const urls = await currentPublishedUrls();
-  await fs.mkdir(REPORTS_DIR, { recursive: true });
-  await fs.writeFile(BASELINE_PATH, `${stableStringify({ urls })}\n`, "utf8");
-  console.log(`Baseline de couverture capturee (${urls.length} URL(s)).`);
-}
+async function main() {
+  const sourceUrls = await publishedUrlsFrom(SRC_DIR);
+  const builtUrls = await publishedUrlsFrom(DIST_DIR);
 
-async function verifyCoverage() {
-  const baseline = JSON.parse(await fs.readFile(BASELINE_PATH, "utf8"));
-  const current = await currentPublishedUrls();
-  const expectedPages = JSON.parse(await fs.readFile(NORMALIZED_PAGES_PATH, "utf8"));
+  const sourceSet = new Set(sourceUrls);
+  const builtSet = new Set(builtUrls);
 
-  const currentSet = new Set(current);
-  const baselineSet = new Set(baseline.urls || []);
-  const expectedSet = new Set(["/", ...expectedPages.map((page) => page.url)]);
-
-  const missingFromBaseline = [...baselineSet].filter((url) => !currentSet.has(url)).sort();
-  const missingFromExpected = [...expectedSet].filter((url) => !currentSet.has(url)).sort();
+  const missingFromBuild = sourceUrls.filter((url) => !builtSet.has(url));
+  const extraInBuild = builtUrls.filter((url) => !sourceSet.has(url));
 
   const report = {
-    baselineCount: baselineSet.size,
-    expectedFromDataCount: expectedSet.size,
-    currentCount: currentSet.size,
-    missingFromBaseline,
-    missingFromExpected,
+    sourceCount: sourceUrls.length,
+    buildCount: builtUrls.length,
+    missingFromBuild,
+    extraInBuild,
   };
 
   await fs.mkdir(REPORTS_DIR, { recursive: true });
   await fs.writeFile(path.join(REPORTS_DIR, "coverage-compare.json"), `${stableStringify(report)}\n`, "utf8");
 
-  if (missingFromBaseline.length || missingFromExpected.length) {
+  if (missingFromBuild.length || extraInBuild.length) {
     throw new Error(
-      `Couverture en echec: ${missingFromBaseline.length} URL baseline manquante(s), ${missingFromExpected.length} URL attendue(s) manquante(s)`
+      `Couverture en echec: ${missingFromBuild.length} URL source manquante(s) dans dist, ${extraInBuild.length} URL en trop dans dist`
     );
   }
 
-  console.log(`Couverture URL OK: ${currentSet.size} URL(s) publiee(s).`);
-}
-
-async function main() {
-  const mode = process.argv[2];
-  if (mode === "--capture") {
-    await captureBaseline();
-    return;
-  }
-  await verifyCoverage();
+  console.log(`Couverture URL OK: ${builtUrls.length} URL(s) publiee(s) conformes a src/.`);
 }
 
 main().catch((error) => {
   console.error(error.message);
   process.exitCode = 1;
 });
-

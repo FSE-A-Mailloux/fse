@@ -1,9 +1,4 @@
-# static-site-publishing Specification
-
-## Purpose
-Definir le comportement requis pour publier un site 100% statique genere par Eleventy a partir du contenu Joomla publie, tout en supprimant les dependances CMS au runtime.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Le contenu Joomla publie MUST etre exporte vers les entrees de build statique
 Le pipeline de publication SHALL prendre comme entree un corpus statique versionne dans le depot et ne plus imposer d'export Joomla pour produire la release publique.
@@ -41,3 +36,4 @@ Le site public livre SHALL ne pas dependre du login CMS, des composants de calen
 #### Scenario: Les pages publiques se rendent sans session authentifiee
 - **WHEN** un visiteur navigue sur n'importe quelle page publique
 - **THEN** tout le contenu de page est disponible sans gestion de session Joomla ni module d'authentification frontend
+

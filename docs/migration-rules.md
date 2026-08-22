@@ -2,7 +2,7 @@
 
 ## Perimetre redirections 301
 
-- Source de verite: `reports/inventory-static-pages.json`
+- Source de verite: corpus statique versionne dans `src/` et mappings definis dans `src/_redirects`
 - Toutes les pages statiques Joomla publiques doivent avoir un mapping 301.
 
 ## Composants dynamiques exclus
