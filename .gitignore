@@ -8,3 +8,6 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+
+# Local DB dump
+fsecoopeidam_mysql_db.sql
