@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ seoTitle }}</title>
+    <meta name="description" content="{{ seoDescription }}">
+    <link rel="canonical" href="{{ site.baseUrl }}{{ canonicalUrl }}">
+    {% if not indexable %}<meta name="robots" content="noindex, nofollow">{% endif %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ ogTitle }}">
+    <meta property="og:description" content="{{ ogDescription }}">
+    <meta property="og:url" content="{{ site.baseUrl }}{{ canonicalUrl }}">
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; color: #1f2937; background: #f9fafb; }
+      header, main, footer { max-width: 980px; margin: 0 auto; padding: 1rem; }
+      header { display: flex; justify-content: space-between; align-items: center; }
+      nav a { margin-right: 0.8rem; }
+      article { background: #fff; padding: 1.2rem; border-radius: 8px; }
+      a { color: #0f4c81; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>{{ site.name }}</strong>
+      <nav>
+        <a href="/">Accueil</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </nav>
+    </header>
+    <main>
+      <article>
+        {{ content | safe }}
+      </article>
+    </main>
+    <footer>
+      <small>Version statique Eleventy</small>
+    </footer>
+  </body>
+</html>
+

@@ -1,12 +1,26 @@
 {
   "name": "fse",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Migration Joomla vers site statique Eleventy avec pipeline SEO",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "export": "node scripts/export-joomla.mjs",
+    "export:verify": "node scripts/verify-export-determinism.mjs",
+    "normalize": "node scripts/normalize-content.mjs",
+    "build": "npm run export && npm run normalize && eleventy",
+    "build:site": "eleventy",
+    "audit": "node scripts/audit-build.mjs",
+    "check:redirects": "node scripts/check-redirects.mjs",
+    "qa": "npm run build && npm run audit && npm run check:redirects",
+    "dev": "npm run export && npm run normalize && eleventy --serve",
+    "test": "npm run export:verify && npm run qa"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "he": "^1.2.0",
+    "mysql2": "^3.11.3"
+  }
 }

@@ -11,3 +11,8 @@ Thumbs.db
 
 # Local DB dump
 fsecoopeidam_mysql_db.sql
+
+# Build and generated migration data
+dist/
+data/
+
