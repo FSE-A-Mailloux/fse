@@ -1,4 +1,7 @@
-export default function () {
+export default function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("docs");
+  eleventyConfig.addPassthroughCopy({ "site/assets": "assets" });
+
   return {
     dir: {
       input: "site",
@@ -9,6 +12,7 @@ export default function () {
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
     templateFormats: ["njk", "md", "html"],
+    pathPrefix: process.env.SITE_PATH_PREFIX || "/",
   };
 }
 

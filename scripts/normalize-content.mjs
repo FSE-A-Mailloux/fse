@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
 import path from "node:path";
 import he from "he";
 
@@ -8,6 +9,7 @@ const ROOT = process.cwd();
 const RAW_DIR = path.join(ROOT, "data", "raw");
 const NORMALIZED_DIR = path.join(ROOT, "data", "normalized");
 const REPORTS_DIR = path.join(ROOT, "reports");
+const MISSING_IMAGE_PLACEHOLDER = "/assets/missing-image.svg";
 
 function stableStringify(value) {
   if (Array.isArray(value)) {
@@ -45,11 +47,19 @@ function parseContentLink(link) {
   const query = link.includes("?") ? link.split("?")[1] : link;
   const params = new URLSearchParams(query);
   const view = params.get("view");
-  const id = Number(params.get("id"));
+  const id = parseJoomlaId(params.get("id"));
   if (!view || Number.isNaN(id)) {
     return null;
   }
   return { view, id };
+}
+
+function parseJoomlaId(rawId) {
+  if (!rawId) {
+    return Number.NaN;
+  }
+  const match = String(rawId).match(/^(\d+)/);
+  return match ? Number(match[1]) : Number.NaN;
 }
 
 function sanitizeAndRewriteHtml(html, mapByArticleId, mapByCategoryId, linkReport) {
@@ -62,7 +72,7 @@ function sanitizeAndRewriteHtml(html, mapByArticleId, mapByCategoryId, linkRepor
     const params = new URLSearchParams(query.replace(/&amp;/g, "&"));
     const option = params.get("option");
     const view = params.get("view");
-    const id = Number(params.get("id"));
+    const id = parseJoomlaId(params.get("id"));
 
     if (option !== "com_content" || Number.isNaN(id)) {
       linkReport.push({ type: "non-rewriteable", source: full });
@@ -80,6 +90,10 @@ function sanitizeAndRewriteHtml(html, mapByArticleId, mapByCategoryId, linkRepor
     return full;
   });
 
+  // Les assets references en "docs/..." cassent sur des URLs profondes.
+  out = out.replace(/(src|href)=["']docs\//gi, "$1=\"/docs/");
+  out = out.replace(/(src|href)=["']\.\.\/imgs\//gi, "$1=\"/imgs/");
+
   return out;
 }
 
@@ -93,6 +107,30 @@ function legacyCandidates(menuItem) {
     out.push(`/${menuItem.alias}`);
   }
   return Array.from(new Set(out.filter(Boolean)));
+}
+
+function buildArticleUrl(baseRoute, article) {
+  const normalizedBase = baseRoute.endsWith("/") ? baseRoute : `${baseRoute}/`;
+  return `${normalizedBase}${slugify(article.alias || article.title)}/`;
+}
+
+function replaceMissingImageSources(html, missingAssetPaths) {
+  if (!html) {
+    return "";
+  }
+  return html.replace(/<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi, (tag, src) => {
+    if (/^(https?:)?\/\//i.test(src) || src.startsWith("data:")) {
+      return tag;
+    }
+    const cleanSrc = src.split("?")[0].split("#")[0];
+    const localPath = cleanSrc.startsWith("/") ? cleanSrc.slice(1) : cleanSrc;
+    const fullPath = path.join(ROOT, localPath);
+    if (fsSync.existsSync(fullPath)) {
+      return tag;
+    }
+    missingAssetPaths.add(cleanSrc);
+    return tag.replace(src, MISSING_IMAGE_PLACEHOLDER);
+  });
 }
 
 async function main() {
@@ -147,10 +185,21 @@ async function main() {
     }
   }
 
+  // Les articles publies sans menu dedie doivent aussi avoir une URL cible valide.
+  for (const article of publishedArticles.values()) {
+    if (articleUrlById.has(article.id)) {
+      continue;
+    }
+    const categoryBase = categoryUrlById.get(article.catid) || "/actualites/";
+    articleUrlById.set(article.id, buildArticleUrl(categoryBase, article));
+  }
+
   const pages = [];
   const redirects = [];
   const unresolvedTargets = [];
   const linkReport = [];
+  const missingAssetPaths = new Set();
+  const generatedUrls = new Set();
 
   for (const menu of staticMenus) {
     const url = routeForMenu(menu);
@@ -180,14 +229,17 @@ async function main() {
         .filter((a) => a.catid === parsed.id)
         .sort((a, b) => a.id - b.id)
         .map((a) => {
-          const articleUrl = articleUrlById.get(a.id) || `${url}${slugify(a.alias || a.title)}/`;
+          const articleUrl = articleUrlById.get(a.id);
           return `<li><a href="${articleUrl}">${decode(a.title)}</a></li>`;
         })
         .join("\n");
       bodyHtml = `<h2>${title}</h2><ul>${articleItems}</ul>`;
     }
 
-    const normalizedBody = sanitizeAndRewriteHtml(bodyHtml, articleUrlById, categoryUrlById, linkReport);
+    const normalizedBody = replaceMissingImageSources(
+      sanitizeAndRewriteHtml(bodyHtml, articleUrlById, categoryUrlById, linkReport),
+      missingAssetPaths
+    );
     const descriptionText = decode(normalizedBody.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()).slice(0, 155);
 
     const page = {
@@ -204,6 +256,45 @@ async function main() {
     };
 
     pages.push(page);
+    generatedUrls.add(page.url);
+    for (const legacy of page.legacyUrls) {
+      redirects.push({ from: legacy, to: page.url, status: 301 });
+    }
+  }
+
+  for (const article of publishedArticles.values()) {
+    const targetUrl = articleUrlById.get(article.id);
+    if (!targetUrl || generatedUrls.has(targetUrl)) {
+      continue;
+    }
+
+    const title = decode(article.title || "").trim() || "Sans titre";
+    const bodyHtml = `${article.introtext || ""}\n${article.fulltext || ""}`;
+    const normalizedBody = replaceMissingImageSources(
+      sanitizeAndRewriteHtml(bodyHtml, articleUrlById, categoryUrlById, linkReport),
+      missingAssetPaths
+    );
+    const descriptionText = decode(normalizedBody.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()).slice(0, 155);
+
+    const page = {
+      sourceMenuId: null,
+      sourceArticleId: article.id,
+      title,
+      url: targetUrl,
+      canonicalUrl: targetUrl,
+      indexable: true,
+      description: descriptionText || `Page ${title}`,
+      ogTitle: title,
+      ogDescription: descriptionText || `Page ${title}`,
+      legacyUrls: [
+        `/index.php?option=com_content&view=article&id=${article.id}`,
+        `/index.php?option=com_content&view=article&id=${article.id}:${article.alias || slugify(title)}`,
+      ],
+      bodyHtml: normalizedBody,
+    };
+
+    pages.push(page);
+    generatedUrls.add(page.url);
     for (const legacy of page.legacyUrls) {
       redirects.push({ from: legacy, to: page.url, status: 301 });
     }
@@ -254,6 +345,7 @@ async function main() {
   await writeStableJson(path.join(REPORTS_DIR, "internal-link-report.json"), {
     unresolvedTargets,
     rewriteIssues: linkReport,
+    missingAssetPaths: Array.from(missingAssetPaths).sort(),
   });
   await writeStableJson(path.join(REPORTS_DIR, "seo-acceptance.json"), seoAcceptance);
 

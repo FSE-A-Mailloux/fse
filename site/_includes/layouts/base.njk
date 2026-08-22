@@ -12,28 +12,49 @@
     <meta property="og:description" content="{{ ogDescription }}">
     <meta property="og:url" content="{{ site.baseUrl }}{{ canonicalUrl }}">
     <style>
-      body { font-family: Arial, sans-serif; margin: 0; color: #1f2937; background: #f9fafb; }
-      header, main, footer { max-width: 980px; margin: 0 auto; padding: 1rem; }
-      header { display: flex; justify-content: space-between; align-items: center; }
-      nav a { margin-right: 0.8rem; }
-      article { background: #fff; padding: 1.2rem; border-radius: 8px; }
-      a { color: #0f4c81; }
+      :root { color-scheme: light; }
+      body { font-family: Inter, Arial, sans-serif; margin: 0; color: #1f2937; background: #f3f6fb; line-height: 1.55; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 1rem; }
+      .topbar { background: #0f172a; color: #e2e8f0; border-bottom: 3px solid #2563eb; }
+      .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+      .brand { font-weight: 700; letter-spacing: .2px; }
+      .meta-nav a { color: #cbd5e1; text-decoration: none; margin-left: .8rem; }
+      .meta-nav a:hover { color: #fff; }
+      .subnav { background: #fff; border-bottom: 1px solid #e2e8f0; }
+      .subnav .wrap { display: flex; flex-wrap: wrap; gap: .45rem .7rem; }
+      .subnav a { display: inline-block; text-decoration: none; color: #1d4ed8; font-size: .95rem; }
+      .subnav a:hover { text-decoration: underline; }
+      main.wrap { padding-top: 1.2rem; padding-bottom: 1.5rem; }
+      article { background: #fff; padding: 1.35rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06); }
+      article img { max-width: 100%; height: auto; }
+      a { color: #1d4ed8; }
+      footer { color: #64748b; font-size: .9rem; }
     </style>
   </head>
   <body>
-    <header>
-      <strong>{{ site.name }}</strong>
-      <nav>
-        <a href="/">Accueil</a>
-        <a href="/sitemap.xml">Sitemap</a>
-      </nav>
+    <header class="topbar">
+      <div class="wrap">
+        <strong class="brand">{{ site.name }}</strong>
+        <nav class="meta-nav">
+          <a href="{{ '/' | url }}">Accueil</a>
+          <a href="{{ '/sitemap.xml' | url }}">Sitemap</a>
+        </nav>
+      </div>
     </header>
-    <main>
+    {% set navPages = pages | selectattr('indexable') | list %}
+    <nav class="subnav" aria-label="Navigation principale">
+      <div class="wrap">
+        {% for navPage in navPages %}
+          <a href="{{ navPage.url | url }}">{{ navPage.title }}</a>
+        {% endfor %}
+      </div>
+    </nav>
+    <main class="wrap">
       <article>
         {{ content | safe }}
       </article>
     </main>
-    <footer>
+    <footer class="wrap">
       <small>Version statique Eleventy</small>
     </footer>
   </body>
