@@ -33,6 +33,8 @@ async function main() {
     badStatus,
   };
 
+  await fs.mkdir(path.join(ROOT, "reports"), { recursive: true });
+
   await fs.writeFile(
     path.join(ROOT, "reports", "redirect-check.json"),
     `${stableStringify(report)}\n`,

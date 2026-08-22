@@ -1,6 +1,6 @@
-# Migration Joomla -> Eleventy (statique)
+# Migration Joomla -> HTML/CSS statique
 
-Ce repository contient une implementation de migration vers un site statique Eleventy, avec:
+Ce repository contient une implementation de migration vers un site purement statique HTML/CSS, avec:
 - extraction MySQL Joomla,
 - normalisation de contenu,
 - generation de pages statiques,
@@ -29,11 +29,26 @@ npm run normalize
 npm run build:site
 ```
 
+Premier passage de migration (capture baseline 11ty pour les controles de parite/couverture):
+
+```bash
+npm run baseline:capture
+```
+
 Pipeline complet + controles:
 
 ```bash
 npm run qa
 ```
+
+Demarrer un serveur local pour ouvrir le site dans le navigateur:
+
+```bash
+npm run build
+npm run serve
+```
+
+Puis ouvrir `http://127.0.0.1:8080`.
 
 Verification determinisme export:
 
@@ -47,4 +62,11 @@ npm run export:verify
 - Donnees normalisees: `data/normalized/*.json`
 - Rapports: `reports/*.json`
 - Site genere: `dist/`
+
+## Notes migration hors 11ty
+
+- Inventaire des points d'entree historiques: `docs/eleventy-inventory.md`
+- Rendu statique direct: `scripts/build-static.mjs`
+- Controle parite structure HTML: `scripts/check-html-parity.mjs`
+- Controle couverture URL: `scripts/compare-coverage.mjs`
 

@@ -34,6 +34,10 @@ async function main() {
   const htmlFiles = await collectHtmlFiles(DIST_DIR);
   const errors = [];
 
+  if (htmlFiles.length === 0) {
+    throw new Error("Audit SEO en echec: aucune page HTML generee dans dist/.");
+  }
+
   for (const file of htmlFiles) {
     const content = await fs.readFile(file, "utf8");
     const relative = path.relative(DIST_DIR, file).replaceAll("\\", "/");
@@ -42,6 +46,12 @@ async function main() {
       { name: "title", ok: /<title>[^<]+<\/title>/i.test(content) },
       { name: "description", ok: /<meta\s+name="description"\s+content="[^"]+"/i.test(content) },
       { name: "canonical", ok: /<link\s+rel="canonical"\s+href="[^"]+"/i.test(content) },
+      {
+        name: "stylesheet",
+        ok:
+          /<link\s+rel="stylesheet"\s+href="\/assets\/site\.css"/i.test(content) ||
+          /@import\s+url\(["']?\/assets\/site\.css["']?\)/i.test(content),
+      },
       { name: "og:title", ok: /<meta\s+property="og:title"\s+content="[^"]+"/i.test(content) },
       { name: "og:description", ok: /<meta\s+property="og:description"\s+content="[^"]+"/i.test(content) },
     ];
