@@ -83,7 +83,8 @@
 
   function renderSecondaryMenu(container, sectionKey, pathname) {
     var config = sections[sectionKey];
-    if (!config) {
+    if (!config || config.items.length <= 1) {
+      // Un sous-menu à une seule entrée ne fait que dupliquer le lien du menu principal.
       container.innerHTML = "";
       return;
     }
