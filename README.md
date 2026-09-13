@@ -63,3 +63,4 @@ Puis ouvrir `http://127.0.0.1:8080`.
 - `dist/`: artefact de publication genere par `npm run build` (autonome, exploitable tel quel)
 - `reports/`: rapports QA generes localement (artefacts JSON non versionnes)
 - `openspec/`: specifications et suivi du changement
+
