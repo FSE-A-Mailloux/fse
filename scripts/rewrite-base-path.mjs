@@ -24,12 +24,15 @@ if (!BASE_PATH.startsWith("/")) {
 
 const REWRITE_EXTENSIONS = new Set([".html", ".js"]);
 
-// Cible href=/src=/action= (HTML) et href: (objets JS), avec guillemets simples ou doubles.
+// Cible href=/src=/action= (HTML), href: (objets JS), et url(...) (@import CSS), avec guillemets simples ou doubles.
 // Le lookahead (?!\/) evite de reecrire les chemins protocole-relatif ("//exemple.com").
 const ATTR_PATTERN = /((?:href|src|action)\s*[:=]\s*)(["'])\/(?!\/)/g;
+const URL_FUNCTION_PATTERN = /(url\(\s*)(["']?)\/(?!\/)/g;
 
 function rewriteContent(content) {
-  return content.replace(ATTR_PATTERN, (_match, prefix, quote) => `${prefix}${quote}${BASE_PATH}/`);
+  return content
+    .replace(ATTR_PATTERN, (_match, prefix, quote) => `${prefix}${quote}${BASE_PATH}/`)
+    .replace(URL_FUNCTION_PATTERN, (_match, prefix, quote) => `${prefix}${quote}${BASE_PATH}/`);
 }
 
 async function walkAndRewrite(dir) {
