@@ -16,28 +16,7 @@
 	</style>
   </head>
   <body>
-	<header class="topbar">
-	  <div class="wrap">
-		<strong class="brand">FSE, l'amicale du collège Auguste Mailloux</strong>
-		<nav class="meta-nav">
-		  <a href="/">Accueil</a>
-		  <a href="/sitemap/">Plan du site</a>
-		</nav>
-	  </div>
-	</header>
-	<nav class="subnav subnav-primary" aria-label="Navigation principale">
-	  <div class="wrap">
-		<a href="/">Accueil</a>
-		<a href="/fse/">FSE</a>
-		<a href="/actualites/">Actualités</a>
-		<a href="/coopsco/">CoopSco</a>
-		<a href="/liens-avec-les-associations/">Liens avec les associations</a>
-		<a href="/nous-contacter/">Nous contacter</a>
-	  </div>
-	</nav>
-	<nav class="subnav subnav-secondary" aria-label="Sous-navigation">
-	  <div class="wrap" id="secondary-nav"></div>
-	</nav>
+<%- include('/_partials/header') %>
 
 	<main class="wrap">
 	  <article>
@@ -84,9 +63,6 @@
 	  </article>
 	</main>
 
-	<footer class="wrap">
-	  <small>Version statique HTML/CSS</small>
-	</footer>
-	<script src="/assets/navigation.js" defer></script>
+<%- include('/_partials/footer') %>
   </body>
 </html>

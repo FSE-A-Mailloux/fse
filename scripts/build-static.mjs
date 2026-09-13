@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { renderPage, PARTIALS_DIR_NAME } from "./render-templates.mjs";
 
 const ROOT = process.cwd();
 const SRC_DIR = path.join(ROOT, "src");
@@ -10,6 +11,11 @@ async function copyDirRecursive(sourceDir, targetDir) {
   const entries = await fs.readdir(sourceDir, { withFileTypes: true });
 
   for (const entry of entries) {
+    // Les partials sont des entrees de rendu, pas des pages publiees.
+    if (entry.name === PARTIALS_DIR_NAME) {
+      continue;
+    }
+
     const from = path.join(sourceDir, entry.name);
     const to = path.join(targetDir, entry.name);
 
@@ -19,7 +25,12 @@ async function copyDirRecursive(sourceDir, targetDir) {
     }
 
     if (entry.isFile()) {
-      await fs.copyFile(from, to);
+      if (entry.name.endsWith(".html")) {
+        const html = await renderPage(from, SRC_DIR);
+        await fs.writeFile(to, html);
+      } else {
+        await fs.copyFile(from, to);
+      }
     }
   }
 }
