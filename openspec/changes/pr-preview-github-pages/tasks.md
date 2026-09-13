@@ -9,20 +9,20 @@
 - [x] 2.2 Ajouter les etapes `checkout`, `setup-node`, `npm ci`, `npm run build` dans ce workflow, et verifier que `dist/` est genere sans erreur dans les logs du run
 - [x] 2.3 Ajouter l'etape de publication de `dist/` vers la branche `gh-pages` dans le sous-dossier `pr-<numero>/` (action de type `peaceiris/actions-gh-pages` avec `destination_dir` et conservation du contenu existant), et verifier que le sous-dossier apparait sur la branche `gh-pages` apres le run
 - [x] 2.4 Ajouter la configuration de concurrence (`concurrency: group: pr-preview-${{ github.event.pull_request.number }}`, `cancel-in-progress: true`), et verifier qu'un second push annule le run precedent encore en cours pour la meme PR
-- [ ] 2.5 Verifier que deux pull requests ouvertes simultanement produisent bien deux sous-dossiers distincts sur `gh-pages` sans que l'un n'ecrase l'autre
+- [x] 2.5 Verifier que deux pull requests ouvertes simultanement produisent bien deux sous-dossiers distincts sur `gh-pages` sans que l'un n'ecrase l'autre
 
 ## 3. Lien d'apercu sur la pull request
 
 - [x] 3.1 Ajouter une etape qui calcule l'URL de l'apercu (`https://<owner>.github.io/<repo>/pr-<numero>/`) et l'affiche dans le resume du run
 - [x] 3.2 Ajouter une etape de commentaire de PR en upsert (identifiant stable) publiant ce lien, et verifier qu'un seul commentaire est cree puis mis a jour a chaque nouveau push sur la meme PR
-- [ ] 3.3 Verifier qu'un echec de `npm run build` empeche la publication du lien comme reussi et rend l'echec visible sur la pull request (statut de check en echec)
+- [x] 3.3 Verifier qu'un echec de `npm run build` empeche la publication du lien comme reussi et rend l'echec visible sur la pull request (statut de check en echec)
 
 ## 4. Workflow de nettoyage
 
 - [x] 4.1 Creer `.github/workflows/pages-preview-cleanup.yml` declenche sur `pull_request` de type `closed`, avec permissions `contents: write`
 - [x] 4.2 Ajouter les etapes qui suppriment le sous-dossier `pr-<numero>/` correspondant sur la branche `gh-pages` et poussent le commit de suppression
-- [ ] 4.3 Verifier, en fermant une pull request de test sans la fusionner, que son sous-dossier `pr-<numero>/` disparait de `gh-pages`
-- [ ] 4.4 Verifier, en fusionnant une autre pull request de test, que son sous-dossier `pr-<numero>/` disparait egalement de `gh-pages` sans impact sur le contenu de production
+- [x] 4.3 Verifier, en fermant une pull request de test sans la fusionner, que son sous-dossier `pr-<numero>/` disparait de `gh-pages`
+- [x] 4.4 Verifier, en fusionnant une autre pull request de test, que son sous-dossier `pr-<numero>/` disparait egalement de `gh-pages` sans impact sur le contenu de production
 
 ## 5. Documentation
 

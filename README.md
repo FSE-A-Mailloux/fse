@@ -73,6 +73,3 @@ Chaque pull request beneficie d'un apercu statique publie automatiquement, sans 
 - **Isolation**: les apercus des differentes PR coexistent sur la meme branche `gh-pages` sans s'ecraser; le site de production n'est pas affecte.
 - **Duree de vie**: a la fermeture (fusionnee ou non) de la PR, le workflow `.github/workflows/pages-preview-cleanup.yml` supprime le sous-dossier `pr-<numero>/` correspondant.
 - **Prerequis d'activation** (a faire une seule fois, manuellement, dans les parametres du depot GitHub): activer *GitHub Pages* avec la branche `gh-pages` comme source. Cette fonctionnalite ne s'applique pas aux PR issues de forks externes (le `GITHUB_TOKEN` associe est en lecture seule et ne peut pas publier sur `gh-pages`).
-
-<!-- commit de test: verification apercu apres fusion (branche B) -->
-
