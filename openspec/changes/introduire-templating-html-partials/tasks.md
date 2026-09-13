@@ -1,6 +1,6 @@
 ## 1. Partials et script de rendu
 
-- [ ] 1.1 Ajouter la dependance npm `ejs` et verifier que `npm install` s'execute sans erreur
+- [x] 1.1 Ajouter la dependance npm `ejs` et verifier que `npm install` s'execute sans erreur
 - [x] 1.2 Extraire le bandeau, la navigation principale et le conteneur de sous-navigation dans `src/_partials/header.ejs`, en verifiant que le contenu est un copier-coller exact d'une page existante
 - [x] 1.3 Extraire le pied de page et le script de navigation dans `src/_partials/footer.ejs`, en verifiant que le contenu est un copier-coller exact d'une page existante
 - [x] 1.4 Ecrire `scripts/render-templates.mjs` (rendu de chaque page via `ejs.renderFile`, capture et enrichissement des erreurs d'inclusion manquante avec le chemin du fichier source) et verifier avec un cas de partial manquant que le script s'arrete avec un message d'erreur clair
