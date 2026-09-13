@@ -34,8 +34,7 @@
       root: "/coopsco/",
       items: [
         { href: "/coopsco/", label: "Vue d'ensemble" },
-        { href: "/coopsco/coopsco-commande/", label: "Commande" },
-        { href: "/coopsco/coopsco-permanence/", label: "Permanences" }
+        { href: "/coopsco/coopsco-commande/", label: "Commande" }
       ]
     },
     liens: {
