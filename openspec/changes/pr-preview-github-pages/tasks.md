@@ -27,3 +27,9 @@
 ## 5. Documentation
 
 - [x] 5.1 Documenter dans le README (ou `docs/`) le fonctionnement des apercus de PR (declenchement, URL, duree de vie), et verifier que la section est presente et coherente avec le comportement observe
+
+## 6. Reecriture des chemins racine absolus pour l'apercu
+
+- [x] 6.1 Creer `scripts/rewrite-base-path.mjs` qui reecrit, dans `dist/` (fichiers `.html` et `.js`), les chemins racine absolus (`href="/..."`, `src="/..."`, `action="/..."`, `href: "/..."` dans `navigation.js`) en les prefixant par un chemin de base fourni en argument, et verifier sur un dossier `dist/` de test que les occurrences sont correctement prefixees sans doublon ni alteration des URLs externes (`http(s)://...`, `//...`)
+- [x] 6.2 Appeler ce script dans `pages-preview.yml` juste apres `npm run build`, avec `/<repo>/pr-<numero>` comme chemin de base, et verifier dans les logs du run que la reecriture s'execute sans erreur avant la publication
+- [ ] 6.3 Verifier manuellement, sur l'URL d'un apercu publie, que la feuille de style, le script de navigation et les liens internes se chargent et pointent correctement vers le sous-chemin de l'apercu (plus de 404 sur les assets ni de liens renvoyant vers la racine du domaine)

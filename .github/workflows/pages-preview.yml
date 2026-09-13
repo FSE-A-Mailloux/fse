@@ -37,10 +37,15 @@ jobs:
           REPO_OWNER="${{ github.repository_owner }}"
           REPO_NAME="$(echo "${{ github.repository }}" | cut -d/ -f2)"
           PREVIEW_DIR="pr-${PR_NUMBER}"
-          PREVIEW_URL="https://${REPO_OWNER}.github.io/${REPO_NAME}/${PREVIEW_DIR}/"
+          BASE_PATH="/${REPO_NAME}/${PREVIEW_DIR}"
+          PREVIEW_URL="https://${REPO_OWNER}.github.io${BASE_PATH}/"
           echo "dir=${PREVIEW_DIR}" >> "$GITHUB_OUTPUT"
+          echo "base_path=${BASE_PATH}" >> "$GITHUB_OUTPUT"
           echo "url=${PREVIEW_URL}" >> "$GITHUB_OUTPUT"
           echo "Preview URL: ${PREVIEW_URL}"
+
+      - name: Rewrite root-absolute paths for the preview base path
+        run: node scripts/rewrite-base-path.mjs dist "${{ steps.preview.outputs.base_path }}"
 
       - name: Publish preview to gh-pages
         uses: peaceiris/actions-gh-pages@v4

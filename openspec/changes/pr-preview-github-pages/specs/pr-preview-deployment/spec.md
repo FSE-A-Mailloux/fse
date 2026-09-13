@@ -47,3 +47,14 @@ Le systeme SHALL supprimer ou desactiver l'apercu publie d'une pull request lors
 #### Scenario: Fermeture par fusion
 - **WHEN** une pull request ayant un apercu publie est fusionnee
 - **THEN** l'apercu correspondant est supprime ou rendu inaccessible sur GitHub Pages, sans impact sur le site de production
+
+### Requirement: Fonctionnement correct de l'apercu publie sous un sous-chemin
+Le systeme SHALL publier chaque apercu de sorte que ses pages, ses feuilles de style, ses scripts et sa navigation interne fonctionnent correctement lorsqu'ils sont servis depuis le sous-chemin dedie de la pull request (par exemple `/pr-<numero>/`), sans dependre d'une publication a la racine du domaine.
+
+#### Scenario: Chargement des styles et scripts de l'apercu
+- **WHEN** un relecteur ouvre l'URL de l'apercu d'une pull request
+- **THEN** la feuille de style et les scripts de la page se chargent correctement depuis le sous-chemin de l'apercu, sans erreur 404 liee a un chemin resolu depuis la racine du domaine
+
+#### Scenario: Navigation interne de l'apercu
+- **WHEN** un relecteur clique sur un lien de navigation interne (menu, contenu de page) dans l'apercu d'une pull request
+- **THEN** la page de destination chargee reste a l'interieur du sous-chemin de cet apercu, sans rediriger vers la racine du domaine ou un autre apercu

@@ -37,12 +37,17 @@ Alternative ecartee: utiliser uniquement un "check run" / statut de commit sans 
 **Permissions minimales du workflow.**
 Le workflow de build/publication demande `contents: write` (pour pousser sur `gh-pages`) et `pull-requests: write` (pour commenter la PR); le workflow de nettoyage ne demande que `contents: write`. Aucun secret supplementaire au-dela du `GITHUB_TOKEN` fourni automatiquement n'est necessaire.
 
+**Reecriture des chemins racine absolus (`/...`) en sortie de build, uniquement pour l'apercu.**
+Les partials et pages de `src/` referencent leurs liens internes et leurs assets avec des chemins racine absolus (`href="/coopsco/"`, `src="/assets/site.css"`, y compris dans `src/assets/navigation.js`). Ce choix est correct pour la production, hebergee a la racine d'un domaine, mais casse tout sous un sous-chemin GitHub Pages comme `/<repo>/pr-<numero>/`: le navigateur resout `/assets/site.css` contre la racine du domaine, pas contre le sous-chemin de l'apercu. Plutot que de modifier `scripts/build-static.mjs` (partage avec la production, cf Non-Goals), le workflow `pages-preview.yml` execute un script dedie `scripts/rewrite-base-path.mjs` juste apres `npm run build`, qui reecrit dans `dist/` (fichiers `.html` et `.js`) tout chemin racine absolu (`href=`, `src=`, `action=`, et les entrees `href:` du menu genere par `navigation.js`) en le prefixant par le chemin de base de l'apercu (`/<repo>/pr-<numero>`).
+Alternative ecartee: passer un `--base-path` a `scripts/build-static.mjs`/`render-templates.mjs` pour generer directement des liens prefixes - plus propre a terme, mais modifie le script de build partage avec la production, ce que ce changement s'interdit (Non-Goals).
+
 ## Risks / Trade-offs
 
 - [Les apercus sont publics sur GitHub Pages sans authentification] → Accepte car le contenu source de `src/` est deja public dans le depot; pas d'information sensible additionnelle exposee par l'apercu.
 - [`GITHUB_TOKEN` d'une PR issue d'un fork externe est en lecture seule et ne peut pas pousser sur `gh-pages`] → Documenter cette limite dans le workflow (etape qui echoue explicitement ou est ignoree pour les PR de forks) plutot que d'echouer silencieusement; l'automatisation reste garantie pour les PR internes au depot.
 - [Accumulation possible de sous-dossiers `pr-<numero>/` si le nettoyage echoue ou si une PR est fermee sans declencher l'evenement `closed`] → Le workflow de nettoyage se declenche sur `closed` (fusionne ou non); en cas d'echec, le sous-dossier reste jusqu'a une purge manuelle - risque juge acceptable car sans impact sur la production.
-- [Concurrence entre deux runs de build sur la meme PR (pushes rapproches)] → Utiliser la concurrence GitHub Actions (`concurrency: group: pr-preview-${{ github.event.pull_request.number }}`, `cancel-in-progress: true`) pour annuler un run obsolete au profit du plus recent.
+- [Concurrence entre deux runs de build sur la meme PR (pushes rapproches)] → Utiliser la configuration de concurrence GitHub Actions (`concurrency: group: pr-preview-${{ github.event.pull_request.number }}`, `cancel-in-progress: true`) pour annuler un run obsolete au profit du plus recent.
+- [La reecriture regex des chemins absolus peut manquer un motif non anticipe (ex. nouvel attribut ou nouvelle syntaxe introduite plus tard dans `src/`)] → Limiter la reecriture aux motifs connus et documentes (`href=`, `src=`, `action=`, `href:` dans `navigation.js`); un motif non couvert cassera un lien dans l'apercu sans affecter la production, risque juge acceptable et detectable visuellement lors de la revue de PR.
 
 ## Migration Plan
 
