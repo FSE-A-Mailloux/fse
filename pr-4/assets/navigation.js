@@ -5,48 +5,48 @@
     accueil: {
       root: "/",
       items: [
-        { href: "/", label: "Accueil" }
+        { href: "/fse/pr-4/", label: "Accueil" }
       ]
     },
     fse: {
       root: "/fse/",
       items: [
-        { href: "/fse/", label: "Vue d'ensemble" },
-        { href: "/fse/comptes-rendus/", label: "Comptes rendus" },
-        { href: "/fse/fse-les-actions/", label: "Les actions" },
-        { href: "/fse/fse-les-actions/autres-dons-soutiens/", label: "Autres soutiens" },
-        { href: "/fse/fse-les-actions/equipements-materiels/", label: "Équipements" },
-        { href: "/fse/fse-les-actions/photos-de-classe/", label: "Photos de classe" },
-        { href: "/fse/fse-les-actions/voyages-scolaires/", label: "Voyages scolaires" },
-        { href: "/fse/fse-qui-sommes-nous/", label: "Qui sommes-nous" }
+        { href: "/fse/pr-4/fse/", label: "Vue d'ensemble" },
+        { href: "/fse/pr-4/fse/comptes-rendus/", label: "Comptes rendus" },
+        { href: "/fse/pr-4/fse/fse-les-actions/", label: "Les actions" },
+        { href: "/fse/pr-4/fse/fse-les-actions/autres-dons-soutiens/", label: "Autres soutiens" },
+        { href: "/fse/pr-4/fse/fse-les-actions/equipements-materiels/", label: "Équipements" },
+        { href: "/fse/pr-4/fse/fse-les-actions/photos-de-classe/", label: "Photos de classe" },
+        { href: "/fse/pr-4/fse/fse-les-actions/voyages-scolaires/", label: "Voyages scolaires" },
+        { href: "/fse/pr-4/fse/fse-qui-sommes-nous/", label: "Qui sommes-nous" }
       ]
     },
     actualites: {
       root: "/actualites/",
       items: [
-        { href: "/actualites/", label: "Toutes les actualités" },
-        { href: "/actualites/prochaine-ag/", label: "Prochaine AG" },
-        { href: "/actualites/ouverture-des-commandes-en-ligne/", label: "Commandes" },
-        { href: "/actualites/vente-de-brioches/", label: "Vente de brioches" }
+        { href: "/fse/pr-4/actualites/", label: "Toutes les actualités" },
+        { href: "/fse/pr-4/actualites/prochaine-ag/", label: "Prochaine AG" },
+        { href: "/fse/pr-4/actualites/ouverture-des-commandes-en-ligne/", label: "Commandes" },
+        { href: "/fse/pr-4/actualites/vente-de-brioches/", label: "Vente de brioches" }
       ]
     },
     coopsco: {
       root: "/coopsco/",
       items: [
-        { href: "/coopsco/", label: "Vue d'ensemble" },
-        { href: "/coopsco/coopsco-commande/", label: "Commande" }
+        { href: "/fse/pr-4/coopsco/", label: "Vue d'ensemble" },
+        { href: "/fse/pr-4/coopsco/coopsco-commande/", label: "Commande" }
       ]
     },
     liens: {
       root: "/liens-avec-les-associations/",
       items: [
-        { href: "/liens-avec-les-associations/", label: "Liens avec les associations" }
+        { href: "/fse/pr-4/liens-avec-les-associations/", label: "Liens avec les associations" }
       ]
     },
     contact: {
       root: "/nous-contacter/",
       items: [
-        { href: "/nous-contacter/", label: "Nous contacter" }
+        { href: "/fse/pr-4/nous-contacter/", label: "Nous contacter" }
       ]
     }
   };
