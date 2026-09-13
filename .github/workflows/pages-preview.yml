@@ -1,0 +1,71 @@
+name: PR Preview - Build and Publish
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Compute preview info
+        id: preview
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REPO_OWNER="${{ github.repository_owner }}"
+          REPO_NAME="$(echo "${{ github.repository }}" | cut -d/ -f2)"
+          PREVIEW_DIR="pr-${PR_NUMBER}"
+          BASE_PATH="/${REPO_NAME}/${PREVIEW_DIR}"
+          PREVIEW_URL="https://${REPO_OWNER}.github.io${BASE_PATH}/"
+          echo "dir=${PREVIEW_DIR}" >> "$GITHUB_OUTPUT"
+          echo "base_path=${BASE_PATH}" >> "$GITHUB_OUTPUT"
+          echo "url=${PREVIEW_URL}" >> "$GITHUB_OUTPUT"
+          echo "Preview URL: ${PREVIEW_URL}"
+
+      - name: Rewrite root-absolute paths for the preview base path
+        run: node scripts/rewrite-base-path.mjs dist "${{ steps.preview.outputs.base_path }}"
+
+      - name: Publish preview to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          destination_dir: ${{ steps.preview.outputs.dir }}
+          publish_branch: gh-pages
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Comment preview link on pull request
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-preview-link
+          message: |
+            ### Apercu de la pull request
+
+            L'apercu statique de cette PR est disponible ici :
+            ${{ steps.preview.outputs.url }}
+
+            Il est reconstruit a chaque nouveau commit et supprime a la fermeture de la PR.
