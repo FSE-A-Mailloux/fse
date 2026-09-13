@@ -5,13 +5,13 @@ Définir les exigences visuelles et d'expérience utilisateur du site public du 
 
 ## Requirements
 
-### Requirement: Le site MUST présenter une identité visuelle moderne et cohérente
+### Requirement: Le site MUST présenter une identité visuelle moderne, distinctive et cohérente
 
-Le site public SHALL appliquer une direction visuelle alternative plus chaleureuse et moins austère, combinant palette expressive, contrastes lisibles, typographie éditoriale et composants de contenu harmonisés, tout en conservant une impression soignée et professionnelle sur l'ensemble des pages.
+Le site public SHALL appliquer une direction visuelle expressive et identifiable, liée au FSE, à l'établissement et à son public scolaire. Elle SHALL pouvoir s'éloigner nettement de la palette, de la typographie et de la composition actuelles, tout en combinant contrastes lisibles, hiérarchie éditoriale, composants harmonisés et impression soignée sur l'ensemble des pages concernées.
 
 #### Scenario: Rendu cohérent sur toutes les pages
 - **WHEN** un visiteur navigue entre les différentes pages du site
-- **THEN** la mise en page, les couleurs, la typographie et les composants suivent la même direction visuelle alternative sur chaque page
+	- **THEN** la mise en page, les couleurs, la typographie et les composants suivent la même direction visuelle distinctive sur chaque page concernée
 
 #### Scenario: Hiérarchie visuelle claire
 - **WHEN** un visiteur charge une page quelconque du site
@@ -19,7 +19,7 @@ Le site public SHALL appliquer une direction visuelle alternative plus chaleureu
 
 #### Scenario: Perception visuelle plus elegante
 - **WHEN** un visiteur consulte la page d'accueil ou une page interne
-- **THEN** les surfaces, bordures, ombres et espacements donnent une impression premium sans surcharge decorative
+	- **THEN** les surfaces, bordures, ombres et espacements donnent une impression singulière et maîtrisée sans surcharge décorative
 
 ### Requirement: La navigation principale MUST être lisible et bien organisée
 
