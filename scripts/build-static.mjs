@@ -78,4 +78,3 @@ main().catch((error) => {
   console.error(error.message);
   process.exitCode = 1;
 });
-throw new Error("Cassure volontaire pour test de verification (task 3.3)");
