@@ -31,6 +31,10 @@ Le processus de publication SHALL produire, pour chaque destination de menu publ
 - **WHEN** la generation de release est terminee
 - **THEN** les pages publiques du perimetre sont livrees sous forme de fichiers statiques complets, sans etape de rendu supplementaire requise en environnement cible
 
+#### Scenario: Le build echoue si un partial reference est introuvable
+- **WHEN** une page source du perimetre reference un partial commun absent de `src/_partials/`
+- **THEN** le build signale le partial manquant et echoue avant publication
+
 ### Requirement: Les fonctions frontend dynamiques MUST etre retirees du runtime public
 Le site public livre SHALL ne pas dependre du login CMS, des composants de calendrier dynamique, ni de modules rendus cote serveur au runtime.
 

@@ -6,7 +6,7 @@ Definir le comportement attendu quand le depot adopte un corpus HTML/CSS statiqu
 ## Requirements
 
 ### Requirement: Le depot de publication MUST versionner un corpus statique de reference
-Le projet SHALL conserver dans `src/` les pages et assets statiques publies comme source de verite pour la livraison, avec une structure stable et exploitable sans etape de compilation applicative.
+Le projet SHALL conserver dans `src/` les pages sources (contenu par page) et les partials communs (`src/_partials/`) comme source de verite editoriale pour la livraison. `src/` SHALL rester une structure stable, versionnee et lisible dans un editeur de code, mais n'est plus tenu d'etre directement servable sans etape de build: c'est l'artefact produit dans `dist/` par `npm run build` qui SHALL etre exploitable tel quel, sans etape de compilation supplementaire, sur un hebergement statique.
 
 #### Scenario: Promotion des artefacts statiques vers la source
 - **WHEN** une version du site est preparee
@@ -14,7 +14,7 @@ Le projet SHALL conserver dans `src/` les pages et assets statiques publies comm
 
 #### Scenario: Source de verite explicite pour l'equipe
 - **WHEN** un contributeur consulte la documentation projet
-- **THEN** il trouve une consigne explicite indiquant que les mises a jour de contenu passent par la mise a jour des fichiers statiques de reference
+- **THEN** il trouve une consigne explicite indiquant que les mises a jour de contenu passent par la mise a jour de `src/` (pages et partials), suivie d'un `npm run build` avant publication
 
 ### Requirement: Les composants de generation Joomla obsoletes MUST etre retires du flux standard
 Le flux de publication standard SHALL exclure les scripts, donnees intermediaires et commandes qui servent uniquement a extraire, normaliser ou regenerer le site depuis Joomla dans ce depot.
