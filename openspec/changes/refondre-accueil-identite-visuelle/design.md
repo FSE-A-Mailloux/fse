@@ -31,6 +31,14 @@ Cette étape évite de retomber sur la palette bleu/or actuelle ou sur une compo
 
 Alternative écartée : commencer directement par des retouches CSS. Cette approche améliore des détails sans garantir un changement d'identité perceptible.
 
+#### Pistes comparées
+
+- **Carnet d'actions** : ivoire, encre vert forêt, corail et vert feuille ; titres éditoriaux en Georgia disponible localement ; composition en une grande introduction, une annotation d'actualité et trois chemins numérotés ; signature sous forme de sceau « FSE x CoopSco ». Risque : le ton papier peut devenir décoratif s'il prend le pas sur les liens.
+- **Cour de récré** : jaune craie, bleu outremer et rouge signal ; typographie système très grasse ; composition en panneaux asymétriques et bandeau d'annonces ; signature sous forme de marge quadrillée. Risque : contraste trop ludique pour les documents et actualités institutionnelles.
+- **Atelier commun** : blanc cassé, orange terre cuite et bleu pétrole ; titres condensés simulés par une pile locale ; composition en index de projets avec onglets ; signature sous forme de ligne de progression des actions. Risque : ressembler à un tableau de bord et réduire la place du message d'accueil.
+
+La piste **Carnet d'actions** est retenue : elle relie la lecture aux projets concrets du collège, introduit une rupture nette avec le bleu/or existant et reste réalisable sans image, police distante ou JavaScript supplémentaire.
+
 ### Décision 2 : concentrer la rupture sur l'accueil et le système partagé minimal
 
 L'accueil sera la surface pilote. Les variables et composants génériques seront ajustés dans `site.css`, et les partials communs ne seront modifiés que si l'accueil ne peut pas exprimer la direction choisie autrement.
@@ -53,6 +61,14 @@ Alternative écartée : construire une expérience principalement animée ou pil
 
 La branche `refonte-accueil-identite-visuelle` sera créée au début de la phase d'application, avant toute modification du code. La proposition actuelle ne crée pas cette branche, conformément à la frontière de planification du workflow.
 
+### Tokens de la piste retenue
+
+- **Couleurs** : encre `#183b35`, corail `#ef6b55`, fond ivoire `#fffdf7`, papier `#f1eee5`, vert feuille `#dfeae1` et texte `#1d2825`.
+- **Typographie** : pile système locale pour la lecture ; titres larges, sobres et responsifs ; libellés en capitales espacées pour les repères éditoriaux.
+- **Grille et rythme** : conteneur existant, introduction en deux colonnes sur bureau puis empilement mobile, alerte sur une ligne puis trois cartes à largeur égale ; espacements en multiples de `0.5rem`.
+- **Surfaces** : rayon court de `8px`, bordures fines, aplats papier différenciés et ombres réservées au cadre principal.
+- **États** : liens soulignés, flèches textuelles compréhensibles sans couleur seule, focus visible conservé par les règles partagées et mouvements neutralisés avec `prefers-reduced-motion`.
+
 ## Risks / Trade-offs
 
 - [Une rupture visuelle trop forte peut réduire la familiarité du site] -> Conserver des libellés explicites, une navigation stable et les repères de contenu du FSE ; tester avec un parcours de visiteur nouveau.
@@ -71,6 +87,14 @@ La branche `refonte-accueil-identite-visuelle` sera créée au début de la phas
 6. Contrôler la page au clavier, avec réduction des mouvements, sur mobile et sur bureau ; examiner des captures avant/après.
 7. Comparer le rendu et les contrats SEO avec l'état précédent.
 8. En cas de rejet de la direction, supprimer ou réviser les changements uniquement sur la branche dédiée ; la branche de référence reste inchangée.
+
+## Validation finale
+
+- Les captures HTTP avant/après montrent une rupture nette : l'accueil passe d'une carte institutionnelle bleu/or à un carnet éditorial ivoire, vert forêt et corail, avec le sceau FSE x CoopSco comme élément signature.
+- Le système ne dépend d'aucun nouvel asset, d'aucune police distante ou d'un service externe. La marge quadrillée et les aplats colorés sont des traitements CSS supprimables sans perte d'information.
+- Les libellés restent explicites et les parcours prioritaires sont plus directs. Le principal compromis est une navigation mobile volontairement dense, héritée du composant partagé, mais sans débordement horizontal.
+- Les vérifications à 320px, 375px et 1280px confirment l'absence de débordement sur `/` et `/home/`. Le focus clavier est visible et la règle `prefers-reduced-motion` est présente dans la feuille de style.
+- `npm run build` et `npm run check` passent ; `dist/` est généré mais aucun fichier sous `dist/` n'est modifié comme source.
 
 ## Open Questions
 

@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FSE - Amicale du collège Auguste Mailloux</title>
-    <meta name="description" content="Site du FSE et de la CoopSco : actions, actualités et projets du collège Auguste Mailloux.">
+    <meta name="description" content="Site du FSE et de la CoopSco du collège Auguste Mailloux au Loroux-Bottereau : actions, actualités et projets.">
     <link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="FSE">
-    <meta property="og:description" content="Découvrez les actions du FSE, la CoopSco et les projets qui font vivre le collège.">
+    <meta property="og:description" content="Découvrez les actions du FSE, la CoopSco et les projets qui font vivre le collège Auguste Mailloux au Loroux-Bottereau.">
     <meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/">
     <style>
       @import url("/assets/site.css");
@@ -17,46 +17,70 @@
   <body>
 <%- include('/_partials/header') %>
 
-    <main class="wrap">
+    <main class="wrap home-page">
       <article>
-        <section class="home-hero">
-          <p class="home-kicker">Vie associative du collège</p>
-          <h1>Bienvenue sur le site du FSE et de la CoopSco</h1>
-          <p class="home-intro">
-            Le <strong>Foyer Socio-Éducatif (FSE)</strong> et la <strong>Coopérative Scolaire (CoopSco)</strong>
-            accompagnent les élèves avec des actions concrètes : voyages, projets pédagogiques,
-            soutien matériel et initiatives solidaires.
-          </p>
-          <p class="home-intro">
-            <strong>Prochaine assemblée générale : jeudi 01/10/2026 à 18h00 au collège.</strong>
-            <a href="/actualites/prochaine-ag/">En savoir plus</a>
-          </p>
+        <section class="home-hero" aria-labelledby="home-title">
+          <div class="home-hero__copy">
+            <p class="home-kicker">Collège Auguste Mailloux · Le Loroux-Bottereau</p>
+            <h1 id="home-title">Faire grandir les projets des élèves</h1>
+            <p class="home-intro">
+              Le <strong>Foyer Socio-Éducatif (FSE)</strong> et la <strong>Coopérative Scolaire (CoopSco)</strong>
+              transforment les idées en voyages, projets pédagogiques, soutien matériel et initiatives solidaires.
+            </p>
+            <a class="home-primary-link" href="/fse/">Découvrir ce que nous faisons <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="home-hero__mark" aria-label="FSE et CoopSco, ensemble pour les élèves">
+            <span class="home-hero__mark-label">Depuis le collège</span>
+            <strong>FSE<br><em>×</em><br>CoopSco</strong>
+            <span class="home-hero__mark-note">des projets<br>qui circulent</span>
+          </div>
         </section>
 
-        <div class="home-grid">
-          <section class="home-card">
-            <h2>Suivre les actualités</h2>
-            <p>Retrouvez rapidement les prochaines actions, ventes et infos pratiques.</p>
-            <a href="/actualites/">Voir les actualités</a>
-          </section>
-          <section class="home-card home-card--accent">
-            <h2>Découvrir le FSE</h2>
-            <p>Comprendre nos missions, nos projets et l'impact concret pour les élèves.</p>
-            <a href="/fse/">Explorer l'espace FSE</a>
-          </section>
-          <section class="home-card">
-            <h2>La CoopSco à chaque rentrée</h2>
-            <p>Découvrez la commande groupée de fournitures scolaires proposée aux familles.</p>
-            <a href="/coopsco/">Accéder à la CoopSco</a>
-          </section>
-        </div>
+        <section class="home-alert" aria-labelledby="home-alert-title">
+          <p class="home-alert__label">À noter</p>
+          <div>
+            <h2 id="home-alert-title">Prochaine assemblée générale</h2>
+            <p><strong>Jeudi 01/10/2026 à 18h00 au collège.</strong> Le rendez-vous pour suivre les décisions et les projets de l'année.</p>
+          </div>
+          <a href="/actualites/prochaine-ag/">Lire l'information <span aria-hidden="true">↗</span></a>
+        </section>
 
-        <section class="home-quick-links" aria-label="Raccourcis utiles">
-          <h2>Raccourcis utiles</h2>
+        <section class="home-actions" aria-labelledby="home-actions-title">
+          <div class="home-section-heading">
+            <p class="home-kicker">Les chemins les plus courts</p>
+            <h2 id="home-actions-title">Que cherchez-vous aujourd'hui&nbsp;?</h2>
+          </div>
+          <div class="home-grid">
+            <section class="home-card home-card--news">
+              <p class="home-card__number">01</p>
+              <h3>Les nouvelles</h3>
+              <p>Actions, ventes et informations pratiques au fil de l'année.</p>
+              <a href="/actualites/">Voir les actualités <span aria-hidden="true">→</span></a>
+            </section>
+            <section class="home-card home-card--fse">
+              <p class="home-card__number">02</p>
+              <h3>Le FSE en action</h3>
+              <p>Nos missions, nos projets et l'impact concret pour les élèves.</p>
+              <a href="/fse/">Explorer le FSE <span aria-hidden="true">→</span></a>
+            </section>
+            <section class="home-card home-card--coop">
+              <p class="home-card__number">03</p>
+              <h3>La CoopSco</h3>
+              <p>Commandes groupées et fournitures scolaires pour les familles.</p>
+              <a href="/coopsco/">Accéder à la CoopSco <span aria-hidden="true">→</span></a>
+            </section>
+          </div>
+        </section>
+
+        <section class="home-quick-links" aria-labelledby="home-links-title">
+          <div>
+            <p class="home-kicker">Pour aller plus loin</p>
+            <h2 id="home-links-title">Les ressources du FSE</h2>
+          </div>
           <ul>
-            <li><a href="/fse/comptes-rendus/">Comptes rendus</a></li>
-            <li><a href="/fse/fse-les-actions/">Les actions du FSE</a></li>
-            <li><a href="/nous-contacter/">Nous contacter</a></li>
+            <li><a href="/fse/comptes-rendus/">Comptes rendus <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/fse/fse-les-actions/">Les actions du FSE <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/nous-contacter/">Nous contacter <span aria-hidden="true">↗</span></a></li>
           </ul>
         </section>
       </article>
