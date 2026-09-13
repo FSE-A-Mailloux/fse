@@ -1,18 +1,26 @@
 # Publication statique de FSE
 
 Ce repository publie un site HTML/CSS statique a partir d'un corpus versionne dans `src/`.
-Le dossier `dist/` est une sortie de publication reconstruite par copie depuis `src/`.
+Le dossier `dist/` est l'artefact de publication genere par le build: c'est lui qui est exploitable tel quel, sans etape supplementaire, sur un hebergement statique.
 
 ## BREAKING CHANGE
 
 La regeneration depuis Joomla (export MySQL + normalisation) est retiree de ce depot.
 Les mises a jour de contenu passent desormais par la mise a jour des fichiers statiques de reference dans `src/`.
 
+**Autre changement notable**: `src/` n'est plus directement servable sans build. Les pages sous `src/**/index.html` utilisent des directives EJS (`<%- include('/_partials/header') %>` / `<%- include('/_partials/footer') %>`) pour reutiliser le bandeau, la navigation principale et le pied de page communs, factorises dans `src/_partials/*.ejs`. `npm run build` est desormais obligatoire pour produire l'artefact final dans `dist/`.
+
 ## Source de verite
 
-- Source statique versionnee: `src/`
-- Sortie de publication: `dist/`
-- Scripts actifs: `scripts/build-static.mjs`, `scripts/serve-static.mjs`, `scripts/audit-build.mjs`, `scripts/check-redirects.mjs`, `scripts/compare-coverage.mjs`
+- Source d'authoring versionnee: `src/` (pages + partials communs sous `src/_partials/`)
+- Sortie de publication (artefact deployable sans etape supplementaire): `dist/`
+- Scripts actifs: `scripts/build-static.mjs`, `scripts/render-templates.mjs`, `scripts/serve-static.mjs`, `scripts/audit-build.mjs`, `scripts/check-redirects.mjs`, `scripts/compare-coverage.mjs`
+
+## Mettre a jour une page
+
+1. Editer le fichier de contenu sous `src/**/index.html` (le contenu specifique a la page uniquement; le bandeau/nav/pied de page viennent des partials).
+2. Pour modifier le bandeau, la navigation principale ou le pied de page communs a toutes les pages, editer `src/_partials/header.ejs` ou `src/_partials/footer.ejs`.
+3. Executer `npm run build` pour regenerer `dist/` avant toute publication ou verification.
 
 ## Prerequis
 
@@ -51,7 +59,7 @@ Puis ouvrir `http://127.0.0.1:8080`.
 
 ## Arborescence utile
 
-- `src/`: corpus statique de reference
-- `dist/`: sortie de publication reconstruite
+- `src/`: source d'authoring (pages + partials communs sous `src/_partials/`)
+- `dist/`: artefact de publication genere par `npm run build` (autonome, exploitable tel quel)
 - `reports/`: rapports QA generes localement (artefacts JSON non versionnes)
 - `openspec/`: specifications et suivi du changement

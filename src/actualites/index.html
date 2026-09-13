@@ -1,62 +1,38 @@
 <!doctype html>
 <html lang="fr">
   <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Actualites</title>
-	<meta name="description" content="Retrouvez les actualites du FSE: commandes, ventes et rendez-vous de l'annee.">
-	<link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/actualites/">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="Actualites">
-	<meta property="og:description" content="Suivez les informations importantes du FSE et de la CoopSco.">
-	<meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/actualites/">
-	<style>
-	  @import url("/assets/site.css");
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Actualites</title>
+    <meta name="description" content="Retrouvez les actualites du FSE: commandes, ventes et rendez-vous de l'annee.">
+    <link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/actualites/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Actualites">
+    <meta property="og:description" content="Suivez les informations importantes du FSE et de la CoopSco.">
+    <meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/actualites/">
+    <style>
+      @import url("/assets/site.css");
+    </style>
   </head>
   <body>
-	<header class="topbar">
-	  <div class="wrap">
-		<strong class="brand">FSE, l'amicale du collège Auguste Mailloux</strong>
-		<nav class="meta-nav">
-		  <a href="/">Accueil</a>
-		  <a href="/sitemap/">Plan du site</a>
-		</nav>
-	  </div>
-	</header>
-	<nav class="subnav subnav-primary" aria-label="Navigation principale">
-	  <div class="wrap">
-		<a href="/">Accueil</a>
-		<a href="/fse/">FSE</a>
-		<a href="/actualites/">Actualites</a>
-		<a href="/coopsco/">CoopSco</a>
-		<a href="/liens-avec-les-associations/">Liens avec les associations</a>
-		<a href="/nous-contacter/">Nous contacter</a>
-	  </div>
-	</nav>
-	<nav class="subnav subnav-secondary" aria-label="Sous-navigation">
-	  <div class="wrap" id="secondary-nav"></div>
-	</nav>
+<%- include('/_partials/header') %>
 
-	<main class="wrap">
-	  <article>
-		<h1>Actualites</h1>
-		<p class="section-lead">
-		  Les actualites du FSE et de la CoopSco pour suivre les campagnes, les reunions
-		  et les actions qui soutiennent les eleves.
-		</p>
+    <main class="wrap">
+      <article>
+        <h1>Actualites</h1>
+        <p class="section-lead">
+          Les actualites du FSE et de la CoopSco pour suivre les campagnes, les reunions
+          et les actions qui soutiennent les eleves.
+        </p>
 
-		<ul class="news-list">
-		  <li><a href="/actualites/ouverture-des-commandes-en-ligne/">Commandes en ligne - campagne fournitures</a></li>
-		  <li><a href="/actualites/vente-de-brioches/">Vente de brioches - action solidaire</a></li>
-		  <li><a href="/actualites/prochaine-ag/">Prochaine AG - jeudi 01/10/2026 a 18h00 au college</a></li>
-		</ul>
-	  </article>
-	</main>
+        <ul class="news-list">
+          <li><a href="/actualites/ouverture-des-commandes-en-ligne/">Commandes en ligne - campagne fournitures</a></li>
+          <li><a href="/actualites/vente-de-brioches/">Vente de brioches - action solidaire</a></li>
+          <li><a href="/actualites/prochaine-ag/">Prochaine AG - jeudi 01/10/2026 a 18h00 au college</a></li>
+        </ul>
+      </article>
+    </main>
 
-	<footer class="wrap">
-	  <small>Version statique HTML/CSS</small>
-	</footer>
-	<script src="/assets/navigation.js" defer></script>
+<%- include('/_partials/footer') %>
   </body>
 </html>

@@ -1,91 +1,67 @@
 <!doctype html>
 <html lang="fr">
   <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>FSE</title>
-	<meta name="description" content="Site du FSE et de la CoopSco: actions, actualites et projets du college Auguste Mailloux.">
-	<link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="FSE">
-	<meta property="og:description" content="Decouvrez les actions du FSE, la CoopSco et les projets qui font vivre le college.">
-	<meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/">
-	<style>
-	  @import url("/assets/site.css");
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FSE - Amicale du collège Auguste Mailloux</title>
+    <meta name="description" content="Site du FSE et de la CoopSco: actions, actualites et projets du college Auguste Mailloux.">
+    <link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FSE">
+    <meta property="og:description" content="Decouvrez les actions du FSE, la CoopSco et les projets qui font vivre le college.">
+    <meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/">
+    <style>
+      @import url("/assets/site.css");
+    </style>
   </head>
   <body>
-	<header class="topbar">
-	  <div class="wrap">
-		<strong class="brand">FSE, l'amicale du collège Auguste Mailloux</strong>
-		<nav class="meta-nav">
-		  <a href="/">Accueil</a>
-		  <a href="/sitemap/">Plan du site</a>
-		</nav>
-	  </div>
-	</header>
-	<nav class="subnav subnav-primary" aria-label="Navigation principale">
-	  <div class="wrap">
-		<a href="/">Accueil</a>
-		<a href="/fse/">FSE</a>
-		<a href="/actualites/">Actualites</a>
-		<a href="/coopsco/">CoopSco</a>
-		<a href="/liens-avec-les-associations/">Liens avec les associations</a>
-		<a href="/nous-contacter/">Nous contacter</a>
-	  </div>
-	</nav>
-	<nav class="subnav subnav-secondary" aria-label="Sous-navigation">
-	  <div class="wrap" id="secondary-nav"></div>
-	</nav>
+<%- include('/_partials/header') %>
 
-	<main class="wrap">
-	  <article>
-		<section class="home-hero">
-		  <p class="home-kicker">Vie associative du college</p>
-		  <h1>Bienvenue sur le site du FSE et de la CoopSco</h1>
-		  <p class="home-intro">
-			Le <strong>Foyer Socio-Educatif (FSE)</strong> et la <strong>Cooperative Scolaire (CoopSco)</strong>
-			accompagnent les eleves avec des actions concretes: voyages, projets pedagogiques,
-			soutien materiel et initiatives solidaires.
-		  </p>
-		  <p class="home-intro">
-			<strong>Prochaine assemblee generale : jeudi 01/10/2026 a 18h00 au college.</strong>
-			<a href="/actualites/prochaine-ag/">En savoir plus</a>
-		  </p>
-		</section>
+    <main class="wrap">
+      <article>
+        <section class="home-hero">
+          <p class="home-kicker">Vie associative du college</p>
+          <h1>Bienvenue sur le site du FSE et de la CoopSco</h1>
+          <p class="home-intro">
+            Le <strong>Foyer Socio-Educatif (FSE)</strong> et la <strong>Cooperative Scolaire (CoopSco)</strong>
+            accompagnent les eleves avec des actions concretes: voyages, projets pedagogiques,
+            soutien materiel et initiatives solidaires.
+          </p>
+          <p class="home-intro">
+            <strong>Prochaine assemblee generale : jeudi 01/10/2026 a 18h00 au college.</strong>
+            <a href="/actualites/prochaine-ag/">En savoir plus</a>
+          </p>
+        </section>
 
-		<div class="home-grid">
-		  <section class="home-card">
-			<h2>Suivre les actualites</h2>
-			<p>Retrouvez rapidement les prochaines actions, ventes et infos pratiques.</p>
-			<a href="/actualites/">Voir les actualites</a>
-		  </section>
-		  <section class="home-card home-card--accent">
-			<h2>Decouvrir le FSE</h2>
-			<p>Comprendre nos missions, nos projets et l'impact concret pour les eleves.</p>
-			<a href="/fse/">Explorer l'espace FSE</a>
-		  </section>
-		  <section class="home-card">
-			<h2>La CoopSco au quotidien</h2>
-			<p>Consultez les permanences, commandes et ressources utiles aux familles.</p>
-			<a href="/coopsco/">Acceder a la CoopSco</a>
-		  </section>
-		</div>
+        <div class="home-grid">
+          <section class="home-card">
+            <h2>Suivre les actualites</h2>
+            <p>Retrouvez rapidement les prochaines actions, ventes et infos pratiques.</p>
+            <a href="/actualites/">Voir les actualites</a>
+          </section>
+          <section class="home-card home-card--accent">
+            <h2>Decouvrir le FSE</h2>
+            <p>Comprendre nos missions, nos projets et l'impact concret pour les eleves.</p>
+            <a href="/fse/">Explorer l'espace FSE</a>
+          </section>
+          <section class="home-card">
+            <h2>La CoopSco au quotidien</h2>
+            <p>Consultez les permanences, commandes et ressources utiles aux familles.</p>
+            <a href="/coopsco/">Acceder a la CoopSco</a>
+          </section>
+        </div>
 
-		<section class="home-quick-links" aria-label="Raccourcis utiles">
-		  <h2>Raccourcis utiles</h2>
-		  <ul>
-			<li><a href="/fse/comptes-rendus/">Comptes rendus</a></li>
-			<li><a href="/fse/fse-les-actions/">Les actions du FSE</a></li>
-			<li><a href="/nous-contacter/">Nous contacter</a></li>
-		  </ul>
-		</section>
-	  </article>
-	</main>
+        <section class="home-quick-links" aria-label="Raccourcis utiles">
+          <h2>Raccourcis utiles</h2>
+          <ul>
+            <li><a href="/fse/comptes-rendus/">Comptes rendus</a></li>
+            <li><a href="/fse/fse-les-actions/">Les actions du FSE</a></li>
+            <li><a href="/nous-contacter/">Nous contacter</a></li>
+          </ul>
+        </section>
+      </article>
+    </main>
 
-	<footer class="wrap">
-	  <small>Version statique HTML/CSS</small>
-	</footer>
-	<script src="/assets/navigation.js" defer></script>
+<%- include('/_partials/footer') %>
   </body>
 </html>

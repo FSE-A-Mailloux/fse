@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-static.mjs",
+    "watch": "node scripts/watch-build.mjs",
     "serve": "node scripts/serve-static.mjs",
     "preview": "npm run build && npm run serve",
+    "dev": "npm run watch & npm run serve",
     "check:seo": "node scripts/audit-build.mjs",
     "check:redirects": "node scripts/check-redirects.mjs",
     "check:coverage": "node scripts/compare-coverage.mjs",
@@ -17,5 +19,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "ejs": "^6.0.1"
+  }
 }

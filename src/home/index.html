@@ -1,81 +1,57 @@
 <!doctype html>
 <html lang="fr">
   <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Accueil</title>
-	<meta name="description" content="Accueil du FSE et de la CoopSco: informations utiles et ressources pour les familles.">
-	<link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/home/">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="Accueil">
-	<meta property="og:description" content="Retrouvez les informations utiles du FSE et de la CoopSco pour l'annee scolaire.">
-	<meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/home/">
-	<style>
-	  @import url("/assets/site.css");
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accueil</title>
+    <meta name="description" content="Accueil du FSE et de la CoopSco: informations utiles et ressources pour les familles.">
+    <link rel="canonical" href="https://www.fse-cooperativescolaire-amailloux.com/home/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Accueil">
+    <meta property="og:description" content="Retrouvez les informations utiles du FSE et de la CoopSco pour l'annee scolaire.">
+    <meta property="og:url" content="https://www.fse-cooperativescolaire-amailloux.com/home/">
+    <style>
+      @import url("/assets/site.css");
+    </style>
   </head>
   <body>
-	<header class="topbar">
-	  <div class="wrap">
-		<strong class="brand">FSE, l'amicale du collège Auguste Mailloux</strong>
-		<nav class="meta-nav">
-		  <a href="/">Accueil</a>
-		  <a href="/sitemap/">Plan du site</a>
-		</nav>
-	  </div>
-	</header>
-	<nav class="subnav subnav-primary" aria-label="Navigation principale">
-	  <div class="wrap">
-		<a href="/">Accueil</a>
-		<a href="/fse/">FSE</a>
-		<a href="/actualites/">Actualites</a>
-		<a href="/coopsco/">CoopSco</a>
-		<a href="/liens-avec-les-associations/">Liens avec les associations</a>
-		<a href="/nous-contacter/">Nous contacter</a>
-	  </div>
-	</nav>
-	<nav class="subnav subnav-secondary" aria-label="Sous-navigation">
-	  <div class="wrap" id="secondary-nav"></div>
-	</nav>
+<%- include('/_partials/header') %>
 
-	<main class="wrap">
-	  <article>
-		<section class="home-hero">
-		  <p class="home-kicker">Informations familles</p>
-		  <h1>Accueil</h1>
-		  <p class="home-intro">
-			Le FSE et la Cooperative Scolaire ont besoin de vous pour continuer a faire vivre
-			les projets des eleves. Retrouvez ici les ressources essentielles de l'annee.
-		  </p>
-		  <p class="home-intro">
-			<strong>Prochaine assemblee generale : jeudi 01/10/2026 a 18h00 au college.</strong>
-			<a href="/actualites/prochaine-ag/">En savoir plus</a>
-		  </p>
-		</section>
+    <main class="wrap">
+      <article>
+        <section class="home-hero">
+          <p class="home-kicker">Informations familles</p>
+          <h1>Accueil</h1>
+          <p class="home-intro">
+            Le FSE et la Cooperative Scolaire ont besoin de vous pour continuer a faire vivre
+            les projets des eleves. Retrouvez ici les ressources essentielles de l'annee.
+          </p>
+          <p class="home-intro">
+            <strong>Prochaine assemblee generale : jeudi 01/10/2026 a 18h00 au college.</strong>
+            <a href="/actualites/prochaine-ag/">En savoir plus</a>
+          </p>
+        </section>
 
-		<div class="home-grid">
-		  <section class="home-card home-card--accent">
-			<h2>Participer a la vie du FSE</h2>
-			<p>Consultez la presentation de l'association et les actions menees.</p>
-			<a href="/fse/fse-qui-sommes-nous/">Voir qui nous sommes</a>
-		  </section>
-		  <section class="home-card">
-			<h2>Infos CoopSco</h2>
-			<p>Commandes, permanences et organisation de la distribution.</p>
-			<a href="/coopsco/">Acceder a la CoopSco</a>
-		  </section>
-		  <section class="home-card">
-			<h2>Document de campagne</h2>
-			<p>Retrouvez le flyer AG et CoopSco de la campagne en cours.</p>
-			<a href="/docs/documents/2025-2026/Flyer_FSE_Montant.pdf">Ouvrir le flyer PDF</a>
-		  </section>
-		</div>
-	  </article>
-	</main>
+        <div class="home-grid">
+          <section class="home-card home-card--accent">
+            <h2>Participer a la vie du FSE</h2>
+            <p>Consultez la presentation de l'association et les actions menees.</p>
+            <a href="/fse/fse-qui-sommes-nous/">Voir qui nous sommes</a>
+          </section>
+          <section class="home-card">
+            <h2>Infos CoopSco</h2>
+            <p>Commandes, permanences et organisation de la distribution.</p>
+            <a href="/coopsco/">Acceder a la CoopSco</a>
+          </section>
+          <section class="home-card">
+            <h2>Document de campagne</h2>
+            <p>Retrouvez le flyer AG et CoopSco de la campagne en cours.</p>
+            <a href="/docs/documents/2025-2026/Flyer_FSE_Montant.pdf">Ouvrir le flyer PDF</a>
+          </section>
+        </div>
+      </article>
+    </main>
 
-	<footer class="wrap">
-	  <small>Version statique HTML/CSS</small>
-	</footer>
-	<script src="/assets/navigation.js" defer></script>
+<%- include('/_partials/footer') %>
   </body>
 </html>
