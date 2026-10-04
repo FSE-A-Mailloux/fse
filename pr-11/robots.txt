@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /fonctionnalites-retirees/
+
+Sitemap: https://www.fse-cooperativescolaire-amailloux.com/sitemap/
