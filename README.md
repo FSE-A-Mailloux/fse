@@ -63,3 +63,13 @@ Puis ouvrir `http://127.0.0.1:8080`.
 - `dist/`: artefact de publication genere par `npm run build` (autonome, exploitable tel quel)
 - `reports/`: rapports QA generes localement (artefacts JSON non versionnes)
 - `openspec/`: specifications et suivi du changement
+
+## Apercu automatique des pull requests (GitHub Pages)
+
+Chaque pull request beneficie d'un apercu statique publie automatiquement, sans installation locale:
+
+- **Declenchement**: a l'ouverture d'une PR, a chaque nouveau commit pousse sur sa branche, et a sa reouverture, le workflow `.github/workflows/pages-preview.yml` execute `npm ci` + `npm run build` puis publie `dist/` sur la branche `gh-pages`.
+- **URL**: chaque PR obtient un sous-dossier dedie `pr-<numero>/`, accessible a `https://<owner>.github.io/<repo>/pr-<numero>/`. Un commentaire est automatiquement ajoute (puis mis a jour) sur la PR avec ce lien.
+- **Isolation**: les apercus des differentes PR coexistent sur la meme branche `gh-pages` sans s'ecraser; le site de production n'est pas affecte.
+- **Duree de vie**: a la fermeture (fusionnee ou non) de la PR, le workflow `.github/workflows/pages-preview-cleanup.yml` supprime le sous-dossier `pr-<numero>/` correspondant.
+- **Prerequis d'activation** (a faire une seule fois, manuellement, dans les parametres du depot GitHub): activer *GitHub Pages* avec la branche `gh-pages` comme source. Cette fonctionnalite ne s'applique pas aux PR issues de forks externes (le `GITHUB_TOKEN` associe est en lecture seule et ne peut pas publier sur `gh-pages`).
