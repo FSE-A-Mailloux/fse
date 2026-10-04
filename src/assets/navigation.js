@@ -25,7 +25,7 @@
       root: "/actualites/",
       items: [
         { href: "/actualites/", label: "Toutes les actualités" },
-        { href: "/actualites/prochaine-ag/", label: "Prochaine AG" },
+        { href: "/actualites/prochaine-ag/", label: "AG du 1er octobre 2026" },
         { href: "/actualites/ouverture-des-commandes-en-ligne/", label: "Commandes" },
         { href: "/actualites/vente-de-brioches/", label: "Vente de brioches" }
       ]
@@ -127,5 +127,4 @@
     init();
   }
 })();
-
 
