@@ -22,6 +22,8 @@ Les mises a jour de contenu passent desormais par la mise a jour des fichiers st
 2. Pour modifier le bandeau, la navigation principale ou le pied de page communs a toutes les pages, editer `src/_partials/header.ejs` ou `src/_partials/footer.ejs`.
 3. Executer `npm run build` pour regenerer `dist/` avant toute publication ou verification.
 
+L'infographie de la page « FSE - Vue d'ensemble » (`src/fse/index.html`) est definie dans `src/_partials/fse-infographic.ejs`, a partir de la premiere page du flyer 2025. Ses styles responsive se trouvent sous les classes `.fse-infographic` dans `src/assets/site.css`.
+
 ## Prerequis
 
 - Node.js 20+
