@@ -60,6 +60,7 @@ Puis ouvrir `http://127.0.0.1:8080`.
 ## Arborescence utile
 
 - `src/`: source d'authoring (pages + partials communs sous `src/_partials/`)
+- `src/assets/logos/`: logos actuels du FSE et de la CoopSco, affiches sur `/` et `/home/`; les autres images et PDF conservent leur emplacement
 - `src/docs/`: ressources PDF/images publiees et referencees par les pages
 - `dist/`: artefact de publication genere par `npm run build` (autonome, exploitable tel quel)
 - `reports/`: rapports QA generes localement (artefacts JSON non versionnes)
